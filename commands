@@ -1,0 +1,37 @@
+conda activate rappi
+
+conda install -n rappi flask
+conda install -n rappi flask_restful
+conda install -n rappi flask_cors
+conda install -n rappi beautifulsoup4
+conda install -n rappi -c anaconda openpyxl
+conda install -n rappi pandas
+conda install -n rappi requests
+conda install -n rappi psycopg2-binary
+
+pip install psycopg2-binary requests beautifulsoup4 pandas openpyxl flask flask_restful flask_cors
+pip uninstall flask_restful flask_cors
+
+export FLASK_APP=./backend/app.py
+export FLASK_DEBUG=1
+flask run
+
+napp.mail.to.rappi@gmail.com
+
+./node_modules/.bin/eslint src/components/Products.vue --fix
+
+SELECT pg_terminate_backend(pid)
+FROM pg_stat_activity
+WHERE datname = 'teste_database';
+
+# Connect to pc database
+ssh napp@40.76.5.75
+sudo su - postgres
+psql
+\c teste_database
+
+SELECT * FROM corello WHERE codigo_barra = '9948078022';
+
+
+curl -o Corello.xml http://www.corello.com.br/XMLData/Napp.xml
+curl -o Lupo.xml http://www.lupo.com.br/XMLData/integracao_catalog.xml
