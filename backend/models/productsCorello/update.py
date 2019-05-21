@@ -6,26 +6,18 @@ from flask import json, request, jsonify
 from psycopg2.extras import RealDictCursor
 from models.ftp_downloader.download import download_file
 from models.productsCorello.query import createTable
+from models.productsCorello.process import main as CorelloMain
 
-class Update(MethodView):
-    def post(self, store_id):
-        response_object = {'status': 'success'}
-        
-        # Get ftp url
-        row = executeSql('SELECT * FROM store WHERE id = {}'.format(store_id))[0]
+def main(store_id):
+    CorelloMain()
+    write_on_database(store_id)
 
-        # Download and write on database
-        download_file(row['ftp_url'])
-        write_on_database(store_id)
+    # Remove remaining files
+    print('Removing last file...')
+    os.remove('temp_writer2.csv')
+    print('Removed !!!')
+    print('Everything up-to-date')
 
-        # Remove remaining files
-        print('Removing last file...')
-        os.remove('temp_writer2.csv')
-        print('Removed !!!')
-        print('Everything up-to-date')
-
-        response_object['message'] = 'Loja atualizada!'
-        return response_object
 
 
 def write_on_database(store_id):

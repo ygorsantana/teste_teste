@@ -1,4 +1,3 @@
-from models.productsCorello.process import main as CorelloMain
 from bs4 import BeautifulSoup
 from datetime import datetime
 import glob, json, os, requests, re, sys, unicodedata, zipfile
@@ -36,12 +35,6 @@ def download_file(store):
         except:
             print("Error extracting files !!!")
             return
-        
-        if 'corello' in str(store).lower():
-            CorelloMain()
-        
-        if 'lupo'in str(store).lower():
-            raise NotImplementedError
 
     except Exception as e:
         print(e)

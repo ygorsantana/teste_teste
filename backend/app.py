@@ -7,7 +7,7 @@ from flask import Flask
 # Imports from files
 from models.productsCorello.export import Export
 from models.productsCorello.products import Products
-from models.productsCorello.update import Update
+from models.update.Update import Update
 from models.store.store import Store
 
 # instantiate the app

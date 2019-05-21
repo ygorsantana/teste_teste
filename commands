@@ -1,8 +1,8 @@
 conda activate rappi
 
-conda install -n rappi flask
-conda install -n rappi flask_restful
-conda install -n rappi flask_cors
+conda install -n rappi -c conda-forge flask
+conda install -n rappi -c conda-forge flask-restful
+conda install -n rappi -c conda-forge flask-cors
 conda install -n rappi beautifulsoup4
 conda install -n rappi -c anaconda openpyxl
 conda install -n rappi pandas
