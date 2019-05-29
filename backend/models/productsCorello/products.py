@@ -4,7 +4,6 @@ from flask_restful import Resource, MethodView
 from flask import json, request, jsonify
 from db import deleteInStore, executeSql, insertIntoStore
 
-
 def update_product(store_id, product_id, post_data):
     conn = psycopg2.connect(host='40.76.5.75', database='teste_database', user='db_napp', password='maker1001')
     cur = conn.cursor()
@@ -31,30 +30,19 @@ def update_product(store_id, product_id, post_data):
     cur.close()
     conn.close()
 
-class Products(MethodView):
-    def get(self, store_id, product_id):
-        products = json.loads(json.dumps(executeSql("SELECT * FROM corello WHERE id_store = {} ORDER BY descricao_produto".format(store_id))))
-        return jsonify({
-                            'products': products
-                        })
-            
-    def post(self):
-        pass
+def get(store_id, product_id):
+    data = executeSql("SELECT * FROM corello WHERE id_store = {} ORDER BY descricao_produto;".format(store_id))
+    products = json.loads(json.dumps(data))
+    return products
+        
 
+def put(store_id, product_id, post_data):
+    response_object = {'status': 'success'}
 
-    def delete(self, store_id):
-        pass
+    # Update values
+    update_product(store_id, product_id, post_data)
 
-    def put(self, store_id, product_id):
-        response_object = {'status': 'success'}
-            
-        # Get response
-        post_data = request.get_json()
-
-        # Update values
-        update_product(store_id, product_id, post_data)
-
-        response_object['message'] = 'Loja atualizada!'
-            
-        return jsonify(response_object)
+    response_object['message'] = 'Loja atualizada!'
+        
+    return jsonify(response_object)
     

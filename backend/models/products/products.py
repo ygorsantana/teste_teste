@@ -9,7 +9,6 @@ class Products(MethodView):
     def get(self, store_id, product_id):
         # Get ftp url
         row = executeSql('SELECT * FROM store WHERE id = {}'.format(store_id))[0]
-
         if 'corello' in str(row['ftp_url']).lower():
             products = Corello.get(store_id, product_id)
         

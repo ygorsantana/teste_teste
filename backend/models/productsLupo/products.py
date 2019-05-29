@@ -34,9 +34,7 @@ def update_product(store_id, product_id, post_data):
 def get(store_id, product_id):
     #print('teste1')
     data = executeSql("SELECT * FROM lupo WHERE id_store = {} ORDER BY descricao_sku;".format(store_id))
-    #print('teste2')
     products = list()
-    #print('teste3')
     for row in data:
         product = dict()
         product['id'] = row['id']

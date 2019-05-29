@@ -31,7 +31,7 @@ def generateExcel(store, post_data):
     for value in post_data:
         if not value:
             continue
-        ws1.append([value.get('corredor_template'), value.get('sub_corredor_template'), value.get('nome_do_produto_template'), value.get('descricao_do_produto_template'), value.get('preco_do_produto_template')])
+        ws1.append([value.get('corredor_template'), value.get('sub_corredor_template'), value.get('nome_do_produto_template'), value.get('descricao_do_produto_template'), value.get('preco_do_produto_template').replace(',', '.')])
 
     # Create second sheet on workbook
     ws2 = wb.create_sheet("Dados da loja")
@@ -88,25 +88,19 @@ def send_mail(store):
         server.login(sender_email, password)
         server.sendmail(sender_email, receiver_email, text)
 
-class Export(MethodView):
-    def post(self, store_id):
-        response_object = {'status': 'success'}
-        # Store information
-        store = getStoreInformation(store_id)
+def post(store_id):
+    # Store information
+    store = getStoreInformation(store_id)
 
-        # Get post data
-        post_data = request.get_json()
+    # Get post data
+    post_data = request.get_json()
 
-        # Generate excel
-        print('Generating excel...')
-        generateExcel(store, post_data)
-        
-        # Send email
-        print('Sending email...')
-        send_mail(store)
-
-        response_object['message'] = 'E-mail enviado com sucesso'
-
-        return jsonify(response_object)
+    # Generate excel
+    print('Generating excel...')
+    generateExcel(store, post_data)
+    
+    # Send email
+    print('Sending email...')
+    send_mail(store)
         
         

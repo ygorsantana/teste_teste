@@ -5,8 +5,7 @@ from flask_restful import Api, Resource
 from flask import Flask
 
 # Imports from files
-from models.productsCorello.export import Export
-from models.productsCorello.products import Products
+from models.products.products import Products
 from models.update.Update import Update
 from models.store.store import Store
 
@@ -30,8 +29,6 @@ def register_api(view, endpoint, url, pk='id', pk_type='int'):
 register_api(Store, 'store_api', '/stores/', pk='store_id')
 register_api(Products, 'product_api', '/stores/<store_id>/products/', pk='product_id')
 api.add_resource(Update, '/stores/<store_id>/update')
-api.add_resource(Export, '/stores/<store_id>/export')
 
 if __name__ == '__main__':
-    app.debug = True
     app.run(host='0.0.0.0', port=5000)
