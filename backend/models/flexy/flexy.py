@@ -4,7 +4,7 @@ from flask import json, request, jsonify
 
 class Flexy(MethodView):
     def get(self):
-        pass
+        return jsonify({'Hello': 'World'})
             
     def post(self):
         pass
