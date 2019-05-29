@@ -33,4 +33,5 @@ api.add_resource(Update, '/stores/<store_id>/update')
 api.add_resource(Export, '/stores/<store_id>/export')
 
 if __name__ == '__main__':
-    app.run()
+    app.debug = True
+    app.run(host='0.0.0.0', port=5000)

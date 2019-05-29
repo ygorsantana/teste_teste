@@ -7,6 +7,7 @@ from psycopg2.extras import RealDictCursor
 from models.ftp_downloader.download import download_file
 from models.productsCorello.query import createTable
 from models.productsCorello.update import main as CorelloUpdate
+from models.productsLupo.update import main as LupoMain
 
 class Update(MethodView):
     def post(self, store_id):
@@ -22,7 +23,7 @@ class Update(MethodView):
             CorelloUpdate(store_id)
         
         if 'lupo'in str(row['ftp_url']).lower():
-            raise NotImplementedError
+            LupoMain(store_id)
 
         response_object['message'] = 'Loja atualizada!'
         return response_object
