@@ -5,7 +5,7 @@ from flask_restful import Api, Resource
 from flask import Flask
 
 # Imports from files
-from models.flexy.flexy import Flexy
+from .models.flexy.flexy import Flexy
 
 # instantiate the app
 app = Flask(__name__)
